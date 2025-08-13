@@ -15,14 +15,7 @@ Fracao CriarFracao(int N, int D);
 Fracao somarFracoes(Fracao F, Fracao G);
 Fracao subtrairFracoes(Fracao F, Fracao G);
 
-//exercicio 3/4 - 7/9 + 5/12
-Fracao F8 = CriarFracao(3,4);
-Fracao F9 = CriarFracao(7,9);
-Fracao F10 = CriarFracao(5,12);
-
-
-
-int main( ){
+int main(int agrc, char* argv[]){
 
     system("cls");
 
@@ -45,6 +38,7 @@ int main( ){
     Fracao F7 = subtrairFracoes(F4, F5);
     exibirFracao (F7);
 
+    //exercicio 3/4 - 7/9 + 5/12
     Fracao F8 = CriarFracao (3,4);
     Fracao F9 = CriarFracao (7,9);
     Fracao F10 = CriarFracao (5, 12);
@@ -65,19 +59,19 @@ Fracao CriarFracao(int N, int D){
 }
 
 void exibirFracao(Fracao F){
-    printf("%d / %d", F.Num, F.Den);
+    printf("%d / %d\n", F.Num, F.Den);
 }
 
 int calcularMDC(int A, int B){
     if (A < 0) A = -A;
     if (B < 0) B = -B;
 
-    while (A % B != 0){
+    while ((A % B) != 0){
         int temp = A;
         A = B;
         B = temp % B;
-        return(B);
     }
+        return(B);
 }
 Fracao simplificarFracao(Fracao F){
     int MDC = calcularMDC(F.Num, F.Den);
@@ -86,7 +80,7 @@ Fracao simplificarFracao(Fracao F){
     return F;
 }
 
-somarFracoes(Fracao F, Fracao G){
+Fracao somarFracoes(Fracao F, Fracao G){
     Fracao Resposta;
     Resposta.Den = F.Den * G.Den;
     Resposta.Num = F.Num * G.Den + G.Num * F.Den;
@@ -95,7 +89,7 @@ somarFracoes(Fracao F, Fracao G){
 
 }
 
-subtrairFracoes(Fracao F, Fracao G){
+Fracao subtrairFracoes(Fracao F, Fracao G){
     Fracao Resposta;
     Resposta.Den = F.Den * G.Den;
     Resposta.Num = F.Num * G.Den - G.Num * F.Den;

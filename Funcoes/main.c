@@ -3,7 +3,7 @@
 #include <math.h>
 #include "fracao.h"
 
-int main( ){
+int main(int argc, char* argv[]){
 
     system("cls");
 
@@ -24,7 +24,9 @@ int main( ){
     Fracao F6 = somarFracoes(F4, F5);
     exibirFracao(F6);
     Fracao F7 = subtrairFracoes(F4, F5);
+    exibirFracao (F7);
 
+    //exercicio 3/4 - 7/9 + 5/12
     Fracao F8 = CriarFracao (3,4);
     Fracao F9 = CriarFracao (7,9);
     Fracao F10 = CriarFracao (5, 12);

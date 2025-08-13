@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <math.h>
 
 typedef struct{
     int Num;
@@ -11,7 +11,7 @@ typedef struct{
 int calcularMDC(int A, int B);
 Fracao simplificarFracao(Fracao F);
 Fracao CriarFracao(int N, int D);
-int somarFracoes(Fracao F, Fracao G);
+Fracao somarFracoes(Fracao F, Fracao G);
 
 void exibirFracao(Fracao F);
 
@@ -32,8 +32,8 @@ Fracao CriarFracao(int N, int D){
 }
 
 void exibirFracao(Fracao F){
-    printf("%d" / "%d\n", F.Num, F.Den);
-    return F;
+    printf("%d / %d\n", F.Num, F.Den);
+
 }
 
 int calcularMDC(int A, int B){
@@ -54,7 +54,7 @@ Fracao simplificarFracao(Fracao F){
     return F;
 }
 
-somarFracoes(Fracao F, Fracao G){
+Fracao somarFracoes(Fracao F, Fracao G){
     Fracao Resposta;
     Resposta.Den = F.Den * G.Den;
     Resposta.Num = F.Num * G.Den + G.Num * F.Den;
