@@ -1,0 +1,1 @@
+Teste para gravação de mensagem em arquivo
