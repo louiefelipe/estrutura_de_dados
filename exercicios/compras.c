@@ -4,18 +4,15 @@
 int main(int argc, char* argv[]){
 
     FILE *fp;
-    fp = fopen("tabuada.txt","a");
+    fp = fopen("nota_fiscal.txt","a");
 
     if (fp == NULL){
         printf("Erro ao abrir arquivo\n");
         exit(1);
     }
 
-    fprintf(fp, "\tTabuada do 9\n");
-    for(int i = 1; i <= 10; i++){
-        fprintf(fp, "9 x %d = %d\n\n", i, 9*i);
-    }
-
+    
+    
     printf("Arquivo criado/atualizado com sucesso!\n");
     fclose(fp);
     return 0;
