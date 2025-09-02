@@ -1,6 +1,8 @@
 #ifndef Equipe_h
 #define Equipe_h
 
+#define ERRO -999
+
 typedef struct 
 {
     int Posicao;
@@ -19,5 +21,8 @@ typedef struct
 } Equipe;
 
 Equipe * LerDados (char * NomeArquivo);
+
+int getPontos(Equipe * T, int Posicao);
+float getAproveitamento(Equipe * T, char * Nome);
 
 #endif

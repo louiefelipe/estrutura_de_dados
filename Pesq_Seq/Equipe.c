@@ -8,7 +8,7 @@ Equipe * LerDados (char * NomeArquivo){
 
     if(fp == NULL){
         printf("ERRO: Não foi possível abrir o arquivo\n");
-        exit (1);
+        exit (ERRO);
     }
 
     Equipe * X = malloc(20 * sizeof(Equipe));
@@ -24,6 +24,26 @@ Equipe * LerDados (char * NomeArquivo){
         printf("%s\t%.2f\n", X[i].Nome, X[i].Aproveitamento);
         i++;
     }
-    
+    fclose(fp);
     return X;
 }
+
+int getPontos(Equipe *T, int Posicao){
+
+    for(int i = 0; i < 20; i++){
+        if(T[i].Posicao == Posicao)
+        return T[i].Pontos;
+    }
+    return ERRO;
+
+float getAproveitamento(Equipe *T, char *Nome){
+    for(int i = 0; i < 20; i++){
+        if (strcmp(T[i].Nome, Nome)==0)
+        return T[i].Aproveitamento;
+
+    return ERRO;  
+    }
+}
+
+}
+        //if (strcmp(T[i].Nome, Nome) == 0)//

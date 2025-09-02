@@ -4,6 +4,12 @@
 #include "Equipe.h"
 
 int main(int argc, char* argv){
-    Equipe * X = LerDados("tabela.csv");
+    Equipe * tabela = LerDados("tabela.csv");
+
+    printf("%d\n", getPontos(tabela, 10));
+    printf("%.2f%%\n", getAproveitamento(tabela, "Corinthians"));
+
+
     return 0;
 }
+
