@@ -5,10 +5,12 @@
 
 int main(int argc, char* argv){
     Equipe * tabela = LerDados("tabela.csv");
+    InsertionSort(tabela, 20);
+    //for(int i = 0; i < 20; i++);
+    //printf("%s\n", tabela[i].Nome);
 
-    printf("%d\n", getPontos(tabela, 10));
-    printf("%.2f%%\n", getAproveitamento(tabela, "Corinthians"));
-
+    //printf("%d\n", getPontos(tabela, 10));
+    //printf("%.2f%%\n", getAproveitamento(tabela, "Corinthians"));
 
     return 0;
 }

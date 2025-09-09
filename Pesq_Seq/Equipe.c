@@ -11,28 +11,52 @@ Equipe * LerDados (char * NomeArquivo){
         exit (ERRO);
     }
 
+    char buffer [200];
+    fscanf(fp, "%s", buffer);
+
     Equipe * X = malloc(20 * sizeof(Equipe));
 
     int i = 0;
-    char Cabecalho[100];
-
-    fscanf(fp, "%s", Cabecalho);
 
     while (fscanf (fp, "%d;%[^;];%[^;];%d;%d;%d,%d;%d;%d;%d;%d;\n", &X[i].Posicao, &X[i].Estado, &X[i].Nome, &X[i].Pontos, &X[i].Jogos, &X[i].Vitorias, &X[i].Empates, &X[i].Derrotas,&X[i].Gols_pro, &X[i].Gols_cont, &X[i].Saldo_Gols) == 11)
     {
         X[i].Aproveitamento = 100 * (float) X[i].Pontos / (float) (3 * X[i].Jogos);
-        printf("%s\t%.2f\n", X[i].Nome, X[i].Aproveitamento);
+        //printf("%s\t%.2f\n", X[i].Nome, X[i].Aproveitamento);
         i++;
     }
     fclose(fp);
     return X;
 }
 
+void InsertionSort(Equipe * V, int N){
+
+    Equipe Chave;
+    int i;
+    int j;
+
+    for(i = 1; i < N; i++){
+
+        Chave = V[i];
+        j = i - 1;
+
+        while(j >= 0 && V[j] > Chave){
+            V[j + 1] = V[j];
+            j--;
+        }
+
+        V[j + 1] = Chave;
+
+    }
+
+}
+
 int getPontos(Equipe *T, int Posicao){
 
     for(int i = 0; i < 20; i++){
-        if(T[i].Posicao == Posicao)
+        if(T[i].Posicao == Posicao){
         return T[i].Pontos;
+
+        }
     }
     return ERRO;
 
