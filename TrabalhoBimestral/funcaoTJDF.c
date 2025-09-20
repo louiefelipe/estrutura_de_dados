@@ -146,7 +146,9 @@ Processo * lerDados(char * arquivo){
         }
         return contador;
     }
-
+     
+    //calcular dias entre dt recebimento e dt resolvido
+    
 
     //código para gerar o arquivo CSV
     void gerarCSVJulgados(Processo * processos, int tamanho){
