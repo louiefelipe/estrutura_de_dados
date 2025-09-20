@@ -32,6 +32,7 @@ int main(int argc, char const *argv[]){
     printf("Quilombolas: %d\n", contarPorFlag(pro, tamanho, 5));
     printf("Infância: %d\n", contarPorFlag(pro, tamanho, 6));
 
+    //Não consegui fazer essa função
     //exibir tempo entre cada processo resolvido
     printf("\tTempo de Resolução do Processo\n");
     for (int i = 0; i < tamanho; i++){ int dias = calcularDias(pro[i].dt_recebimento, pro[i].dt_resolvido);
