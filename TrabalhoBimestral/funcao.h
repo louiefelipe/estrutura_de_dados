@@ -33,11 +33,14 @@ typedef struct{
     int susm1;
 } Processo;
 
+
 Processo * lerDados(char * arquivo);
 int ContarLinha(char * arquivo);
 double calcularMeta1(Processo * processos, int tamanho);
 
-
 int contarPorFlag(Processo * processos, int tamanho, int tipo_flag);
+
+int calcularDias(char * data_inicial, char * data_final);
+void gerarCSVJulgados(Processo * processos, int tamanho);
 
 #endif

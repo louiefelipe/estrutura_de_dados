@@ -1,0 +1,52 @@
+//código para contar os dias entre dt_recebimento e dt_resolvido
+
+    static void StringData(char * data_str, Data * data){
+        sscanf(data_str, "%d/%d/%d", &data->dia, &data->mes, data->ano);
+    }
+    
+    //verifica se o ano é bissexto e retorna 1 ou 0 para sim ou nao
+    static int bissexto(int ano){
+        return (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
+    }
+
+    //retorna numero de dias no mês
+    static int diasAes (Data data){
+        int diasPorMes[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int dias = data.dia;
+        for(int i = 1; i <data.mes; i++){
+            dias += diasPorMes[i];
+        }
+        if(bissexto(data.ano) && data.mes > 2){
+            dias++;
+        }
+
+        return dias;
+    }
+
+    //calcular diferença entre dias
+    int calcularDias(char * data_inicial_str, char * data_final_str) {
+    if (strlen(data_inicial_str) == 0 || strlen(data_final_str) == 0) {
+        return -1; //retorna -1 se uma das datas estiver vazia
+    }
+    
+    Data data_inicial, data_final;
+    StringData(data_inicial_str, &data_inicial);
+    StringData(data_final_str, &data_final);
+    
+    int dias = 0;
+    
+    //calcula os dias de anos completos entre as datas
+    for (int i = data_inicial.ano + 1; i < data_final.ano; i++) {
+        dias += bissexto(i) ? 366 : 365;
+    }
+    
+    //calcula os dias do ano inicial e do ano final
+    if (data_inicial.ano == data_final.ano) {
+        dias = diasAes(data_final) - diasAes(data_inicial);
+    } else {
+        dias += (bissexto(data_inicial.ano) ? 366 : 365) - diasAes(data_inicial);
+        dias += diasAes(data_final);
+    }
+
+    return dias;
+}

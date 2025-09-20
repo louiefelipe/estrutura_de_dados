@@ -146,3 +146,45 @@ Processo * lerDados(char * arquivo){
         }
         return contador;
     }
+
+
+    //código para gerar o arquivo CSV
+    void gerarCSVJulgados(Processo * processos, int tamanho){
+    FILE *fp = fopen("processos_julgadosM1.csv", "w");
+    if (fp == NULL) {
+        printf("ERRO: Nao foi possivel gerar o arquivo de saída.\n");
+        exit(1);
+    }
+
+    fprintf(fp, "id_processo;numero_sigilo;sigla_grau;procedimento;ramo_justica;sigla_tribunal;id_tribunal;recurso;id_ultimo_oj;dt_recebimento;dt_julgamento;id_ultima_classe;flag_violencia_domestica;flag_feminicidio;flag_ambiental;flag_quilombolas;flag_indigenas;flag_infancia;decisao;dt_resolvido;cnm1;primeirasentm1;baixm1;decm1;mpum1;julgadom1;desm1;susm1\n");
+
+    int contador_julgados = 0;
+    for (int i = 0; i < tamanho; i++) {
+
+        //verifica se o processo foi julgado
+
+        if (processos[i].julgadom1 == 1) {
+
+            //escreve a linha do processo no novo arquivo
+            fprintf(fp, "%d;%s;%s;%s;%s;%s;%d;%d;%d;%s;%s;%d;%d;%d;%d;%d;%d;%d;%d;%s;%d;%d;%d;%d;%d;%d;%d;%d\n",
+                processos[i].id_processo, 
+                processos[i].numero_sigilo, processos[i].sigla_grau, processos[i].procedimento, 
+                processos[i].ramo_justica, processos[i].sigla_tribunal, processos[i].id_tribunal, 
+                processos[i].recurso, processos[i].id_ultimo_oj, processos[i].dt_recebimento, 
+                processos[i].dt_julgamento, processos[i].id_ultima_classe, 
+                processos[i].flag_violencia_domestica, processos[i].flag_feminicidio, 
+                processos[i].flag_ambiental, processos[i].flag_quilombolas, 
+                processos[i].flag_indigenas, processos[i].flag_infancia, 
+                processos[i].decisao, processos[i].dt_resolvido, processos[i].cnm1, 
+                processos[i].primeirasentm1, processos[i].baixm1, processos[i].decm1, 
+                processos[i].mpum1, processos[i].julgadom1, processos[i].desm1, 
+                processos[i].susm1);
+            contador_julgados++;
+        }
+    }
+    
+    printf("Arquivo 'processos_julgados.csv' gerado com sucesso. Total de %d processos.\n", contador_julgados);
+    fclose(fp);
+}
+
+
