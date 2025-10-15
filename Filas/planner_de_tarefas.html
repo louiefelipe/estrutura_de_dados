@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Lista de Tarefas</title>
+   <style>
+    :root { --borda:#e0e0e0; --cinza:#f8f9fa; --texto:#222; --verde:#d1e7dd; --laranja:#ffe8cc; --azul:#e7f1ff; }
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;margin:24px;color:var(--texto);}
+    h1{font-size:22px;margin:0 0 16px;}
+    table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--borda);table-layout:fixed;}
+    thead th{background:var(--cinza);text-align:left;font-weight:600;padding:10px;border-bottom:1px solid var(--borda);} 
+    td{padding:10px;border-top:1px solid var(--borda);vertical-align:middle;word-wrap:break-word;}
+    .col-titulo{width:45%;}
+    .col-responsavel{width:18%;}
+    .col-status{width:15%;}
+    .col-progresso{width:15%;}
+    .col-avaliacao{width:7%;}
+    .status{display:inline-block;padding:4px 8px;border-radius:8px;font-size:12px;font-weight:600;}
+    .status-afazer{background:var(--azul);}
+    .status-emandamento{background:var(--laranja);}
+    .status-feito{background:var(--verde);}
+    .progresso{width:100%;height:10px;background:#eee;border-radius:6px;overflow:hidden;border:1px solid #ddd;}
+    .progresso-barra{height:100%;background:#2f80ed;}
+    .estrela{font-size:14px;color:#ffb703;}
+    @media (max-width:720px){ .col-titulo{width:100%;} }
+   </style>
+</head>
+<body>
+   <h1>Lista de Tarefas</h1>
+   <table>
+       <thead>
+           <tr>
+               <th style="width:5%;">#</th>
+               <th class="col-titulo">Título</th>
+               <th class="col-responsavel">Responsável</th>
+               <th class="col-status">Status</th>
+               <th class="col-progresso">Progresso</th>
+               <th class="col-avaliacao">Avaliação</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td>01</td>
+               <td class="col-titulo">Entrega do relatorio de BD</td>
+               <td class="col-responsavel">Rafael Souza</td>
+               <td class="col-status"><span class="status status-feito">Concluído</span></td>
+               <td class="col-progresso">
+                   <div class="progresso"><div class="progresso-barra" style="width:100%"></div></div>
+               </td>
+               <td class="col-avaliacao estrela">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
+           </tr>
+           <tr>
+               <td>02</td>
+               <td class="col-titulo">Revisao do codigo do sistema</td>
+               <td class="col-responsavel">Carlos Henrique</td>
+               <td class="col-status"><span class="status status-feito">Concluído</span></td>
+               <td class="col-progresso">
+                   <div class="progresso"><div class="progresso-barra" style="width:100%"></div></div>
+               </td>
+               <td class="col-avaliacao estrela">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+           </tr>
+           <tr>
+               <td>03</td>
+               <td class="col-titulo">Criacao de mockups para o app</td>
+               <td class="col-responsavel">Juliana Ribeiro</td>
+               <td class="col-status"><span class="status status-emandamento">Em Andamento</span></td>
+               <td class="col-progresso">
+                   <div class="progresso"><div class="progresso-barra" style="width:40%"></div></div>
+               </td>
+               <td class="col-avaliacao estrela">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
+           </tr>
+           <tr>
+               <td>04</td>
+               <td class="col-titulo">Levantamento de requisitos</td>
+               <td class="col-responsavel">Rafael Souza</td>
+               <td class="col-status"><span class="status status-afazer">A Fazer</span></td>
+               <td class="col-progresso">
+                   <div class="progresso"><div class="progresso-barra" style="width:0%"></div></div>
+               </td>
+               <td class="col-avaliacao estrela">&#9733;&#9733;&#9734;&#9734;&#9734;</td>
+           </tr>
+           <tr>
+               <td>05</td>
+               <td class="col-titulo">Treinamento da equipe</td>
+               <td class="col-responsavel">Fernanda Lima</td>
+               <td class="col-status"><span class="status status-emandamento">Em Andamento</span></td>
+               <td class="col-progresso">
+                   <div class="progresso"><div class="progresso-barra" style="width:60%"></div></div>
+               </td>
+               <td class="col-avaliacao estrela">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
+           </tr>
+           <tr>
+               <td>06</td>
+               <td class="col-titulo">Testes automatizados</td>
+               <td class="col-responsavel">Lucas Martins</td>
+               <td class="col-status"><span class="status status-afazer">A Fazer</span></td>
+               <td class="col-progresso">
+                   <div class="progresso"><div class="progresso-barra" style="width:0%"></div></div>
+               </td>
+               <td class="col-avaliacao estrela">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+           </tr>
+           <tr>
+               <td>07</td>
+               <td class="col-titulo">Atualizacao da documentacao tecnica</td>
+               <td class="col-responsavel">Mariana Alves</td>
+               <td class="col-status"><span class="status status-afazer">A Fazer</span></td>
+               <td class="col-progresso">
+                   <div class="progresso"><div class="progresso-barra" style="width:0%"></div></div>
+               </td>
+               <td class="col-avaliacao estrela">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
+           </tr>
+           <tr>
+               <td>08</td>
+               <td class="col-titulo">Integracao com API externa</td>
+               <td class="col-responsavel">Pedro Rocha</td>
+               <td class="col-status"><span class="status status-emandamento">Em Andamento</span></td>
+               <td class="col-progresso">
+                   <div class="progresso"><div class="progresso-barra" style="width:50%"></div></div>
+               </td>
+               <td class="col-avaliacao estrela">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
+           </tr>
+           <tr>
+               <td>09</td>
+               <td class="col-titulo">Apresentacao para o cliente</td>
+               <td class="col-responsavel">Bianca Torres</td>
+               <td class="col-status"><span class="status status-feito">Concluído</span></td>
+               <td class="col-progresso">
+                   <div class="progresso"><div class="progresso-barra" style="width:100%"></div></div>
+               </td>
+               <td class="col-avaliacao estrela">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+           </tr>
+           <tr>
+               <td>10</td>
+               <td class="col-titulo">Correcao de bugs criticos</td>
+               <td class="col-responsavel">Joao Victor</td>
+               <td class="col-status"><span class="status status-emandamento">Em Andamento</span></td>
+               <td class="col-progresso">
+                   <div class="progresso"><div class="progresso-barra" style="width:30%"></div></div>
+               </td>
+               <td class="col-avaliacao estrela">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+           </tr>
+       </tbody>
+   </table>
+</body>
+</html>
