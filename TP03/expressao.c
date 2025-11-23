@@ -1,166 +1,270 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
+#include <math.h>
 
 #include "expressao.h"
-#define PI 3.14159265358979323846
 
 typedef struct {
-    float itens[512];
+    float dados[512];
     int topo;
-}topoPilha;
-
-void empilhar(topoPilha * p, float Valor){
-    if (p->topo < 511) {
-        p->topo++;
-        p->itens[p->topo] = Valor;
-    }
-}
-
-float desempilhar(topoPilha * p){
-    if (p->topo >= 0) {
-        float valor = p->itens[p->topo];
-        p->topo--;
-        return valor;
-    }
-    return 0; // retorna 0 se a pilha estiver vazia
-}
-
-typedef struct Node{
-    char data[512];
-    struct Node *next;
-} Node;
+} Pilha;
 
 typedef struct {
-    Node *top;
-} Stack;
+    char dados[512][512];
+    int topo;
+} PilhaString;
 
-void initStack(Stack *s) {
-    s->top = NULL;
+void empilhar(Pilha * p, float Valor){
+    p->topo++;
+    p->dados[p->topo] = Valor;
 }
 
-void push(Stack *s, const char *data) {
-    Node *newNode = (Node *)malloc(sizeof(Node));
-    if (newNode == NULL) {
-        printf("Erro ao alocar memoria para novo nó da pilha.\n");
-        exit(1);
-    }
-    strcpy(newNode->data, data);
-    newNode->data[511] = '\0';
-    newNode->next = s->top;
-    s->top = newNode;
-}
-char* pop(Stack *s, char *result) {
-    if (s->top == NULL) {
-        return NULL; // Pilha vazia
-    }
-    Node *temp = s->top;
-    strcpy(result, temp->data);
-    s->top = s->top->next;
-    free(temp);
-    return result;
+float desempilhar(Pilha * p){
+    float Aux;
+    Aux = p->dados[p->topo];
+    p->topo--;
+    return Aux;
 }
 
-float getValorPosFixa(char *StrPosFixa){
-    topoPilha * pilha = (topoPilha *) malloc (sizeof(topoPilha));
-    pilha->topo = -1;
-    float a, b;
-
-    char tempStr[512];
-    strcpy(tempStr, StrPosFixa);
-    tempStr[511] = '\0';
+float getValorPosFixa(char * StrPosFixa){
+    Pilha p;
+    p.topo = -1;
 
     char * token = strtok(StrPosFixa, " ");
 
     while(token != NULL){
         if(strcmp(token, "+") == 0){
-            float b = desempilhar(pilha);
-            float a = desempilhar(pilha);
-            float soma = a + b;
-            empilhar(pilha, soma);
-        }
-        else if(strcmp(token, "-") == 0){
-            float b = desempilhar(pilha);
-            float a = desempilhar(pilha);
-            float sub = a - b;
-            empilhar(pilha, sub);
-        }
-        else if(strcmp(token, "*") == 0){
-            float b = desempilhar(pilha);
-            float a = desempilhar(pilha);
-            float multiplicacao = a * b;
-            empilhar(pilha, multiplicacao);
-        }
-        else if(strcmp(token, "/") == 0){
-            float b = desempilhar(pilha);
-            float a = desempilhar(pilha);
-            if (b == 0.0) return NAN;
-            empilhar(pilha, a / b);
-        }
-        else if(strcmp(token, "^") == 0){
-            float b = desempilhar(pilha);
-            float a = desempilhar(pilha);
-            float potencia = pow(a, b);
-            empilhar(pilha, potencia);
-        }
-        else if(strcmp(token, "%") == 0){
-            float b = desempilhar(pilha);
-            float a = desempilhar(pilha);
-            float resto = fmod(a, b);
-            empilhar(pilha, resto);
-        }
-        else if(strcmp(token, "raiz") == 0){
-            float a = desempilhar(pilha);
-            float raiz = sqrt(a);
-            empilhar(pilha, raiz);
-        }
-        else if(strcmp(token, "log") == 0){
-            float a = desempilhar(pilha);
-            float logaritmo = log10(a);
-            empilhar(pilha, logaritmo);
-        }
-        else if(strcmp(token, "sen") == 0){
-            float a = desempilhar(pilha);
-            float angulo = a *(PI / 180.0);
-            float seno = sin(angulo);
-            empilhar(pilha, seno);
-        }
-        else if(strcmp(token, "cos") == 0){
-            float a = desempilhar(pilha);
-            float angulo = a *(PI / 180.0);
-            float cosseno = cos(angulo);
-            empilhar(pilha, cosseno);
-        }
-        else if(strcmp(token, "tg") == 0){
-            float a = desempilhar(pilha);
-            float angulo = a *(PI / 180.0);
-            float tangente = tan(angulo);
-            empilhar(pilha, tangente);
+            float B = desempilhar(&p);
+            float A = desempilhar(&p);
+            float Soma = A + B;
+            empilhar(&p, Soma);
         }
 
-        else{
-            empilhar(pilha, atof(token));
+        else if(strcmp(token, "-") == 0){
+            float B = desempilhar(&p);
+            float A = desempilhar(&p);
+            float Subtracao = A - B;
+            empilhar(&p, Subtracao);
         }
+
+        else if(strcmp(token, "*") == 0){
+            float B = desempilhar(&p);
+            float A = desempilhar(&p);
+            float Produto = A * B;
+            empilhar(&p, Produto);
+        }
+
+        else if(strcmp(token, "/") == 0){
+            float B = desempilhar(&p);
+            float A = desempilhar(&p);
+            float Quociente = A / B;
+            empilhar(&p, Quociente);
+        }
+
+        
+        else if(strcmp(token, "^") == 0){
+            float B = desempilhar(&p);
+            float A = desempilhar(&p);
+            float Potencia = pow(A, B);
+            empilhar(&p, Potencia);
+        }
+
+        else if(strcmp(token, "sen") == 0){
+            float A = desempilhar(&p);
+            float Angulo = A * (3.14159 / 180);
+            float Seno = sin(Angulo);
+            empilhar(&p, Seno);
+        }
+
+        else if(strcmp(token, "cos") == 0){
+            float A = desempilhar(&p);
+            float Angulo = A * (3.14159 / 180);
+            float Cosseno = cos(Angulo);
+            empilhar(&p, Cosseno);
+        }
+
+        else if(strcmp(token, "tg") == 0){
+            float A = desempilhar(&p);
+            float Angulo = A * (3.14159 / 180);
+            float Tangente = tan(Angulo);
+            empilhar(&p, Tangente);
+        }
+
+        else if(strcmp(token, "log") == 0){
+            float A = desempilhar(&p);
+            float Logaritmo = log10(A);
+            empilhar(&p, Logaritmo);
+        }
+
+        else if(strcmp(token, "raiz") == 0){
+            float A = desempilhar(&p);
+            float raizQuadrada = sqrt(A);
+            empilhar(&p, raizQuadrada);
+        } else {
+        float Numero = atof(token);
+        empilhar(&p, Numero);
+    }
+
+
         token = strtok(NULL, " ");
     }
 
-    float resultado = desempilhar(pilha);
-    free(pilha);
-    return resultado;
+    return desempilhar(&p);
 }
 
+void empilharString(PilhaString * p, char * String){
+    p->topo++;
+    strcpy(p->dados[p->topo], String);
+}
 
-char getFormaInfixa(char * Str){
-    static char resultInfixa[512]; 
-    Stack s;
-    p.top = -1;
+char * desempilharString(PilhaString * p){
+    char * aux = p->dados[p->topo];
+    p->topo--;
+    return aux;
+}
 
-    char * token = strtok(Str, " ");
+char * getFormaInFixa(char * String){
+    static char Resultado[512];
+    PilhaString p;
+    p.topo = -1;
 
-    while (token != NULL){
-        if (strcmp(token))
+    char * token = strtok(String, " ");
+
+    while(token != NULL){
+
+        if(strcmp(token, "+") == 0){
+            char * B = desempilharString(&p);
+            char * A = desempilharString(&p);
+            char novaExpressao[512];
+
+            sprintf(novaExpressao, "%s+%s", A, B);
+
+            empilharString(&p, novaExpressao);
+
+        } else if (strcmp(token, "-") == 0){
+            char * B = desempilharString(&p);
+            char * A = desempilharString(&p);
+            char novaExpressao[512];
+
+            sprintf(novaExpressao, "%s-%s", A, B);
+
+            empilharString(&p, novaExpressao);
+
+        } else if(strcmp(token, "*") == 0){
+            char * B = desempilharString(&p);
+            char * A = desempilharString(&p);
+            char novaExpressao[512];
+
+            char A_formatado[512];
+            if(strchr(A, '+') != NULL || strchr(A, '-') != NULL){
+                 sprintf(A_formatado, "(%s)", A);
+            } else {
+                 strcpy(A_formatado, A);
+         }
+
+            char B_formatado[512];
+            if(strchr(B, '+') != NULL || strchr (B, '-') != NULL){
+            sprintf(B_formatado, "(%s)", B);
+         } else {
+            strcpy(B_formatado, B);
+         }
+
+            sprintf(novaExpressao, "%s*%s", A_formatado, B_formatado);
+            
+            empilharString(&p, novaExpressao);
+
+
+        } else if(strcmp(token, "/") == 0){
+            char * B = desempilharString(&p);
+            char * A = desempilharString(&p);
+            char novaExpressao[512];
+
+            char A_formatado[512];
+            if(strchr(A, '+') != NULL || strchr(A, '-') != NULL){
+                 sprintf(A_formatado, "(%s)", A);
+            } else {
+                 strcpy(A_formatado, A);
+         }
+
+            char B_formatado[512];
+            if(strchr(B, '+') != NULL || strchr (B, '-') != NULL){
+            sprintf(B_formatado, "(%s)", B);
+         } else {
+            strcpy(B_formatado, B);
+         }
+
+            sprintf(novaExpressao, "%s*%s", A_formatado, B_formatado);
+
+            empilharString(&p, novaExpressao);
+
+        } else if(strcmp(token, "^") == 0){
+            char * B = desempilharString(&p);
+            char * A = desempilharString(&p);
+            char novaExpressao[512];
+
+            sprintf(novaExpressao, "(%s^%s)", A, B);
+
+            empilharString(&p, novaExpressao);
+
+        } else if(strcmp(token, "%") == 0){
+            char * B = desempilharString(&p);
+            char * A = desempilharString(&p);
+            char novaExpressao[512];
+
+            sprintf(novaExpressao, "(%s %% %s)", A, B);
+
+            empilharString(&p, novaExpressao);
+
+        } else if(strcmp(token, "sen") == 0){
+            char * A = desempilharString(&p);
+            char novaExpressao[512];
+
+            sprintf(novaExpressao, "sen(%s)", A);
+
+            empilharString(&p, novaExpressao);
+
+        } else if(strcmp(token, "cos") == 0){
+            char * A = desempilharString(&p);
+            char novaExpressao[512];
+
+            sprintf(novaExpressao, "cos(%s)", A);
+
+            empilharString(&p, novaExpressao);
+
+        } else if(strcmp(token, "tg") == 0){
+            char * A = desempilharString(&p);
+            char novaExpressao[512];
+
+            sprintf(novaExpressao, "tg(%s)", A);
+
+            empilharString(&p, novaExpressao);
+
+        } else if(strcmp(token, "log") == 0){
+            char * A = desempilharString(&p);
+            char novaExpressao[512];
+
+            sprintf(novaExpressao, "log(%s)", A);
+
+            empilharString(&p, novaExpressao);
+        
+        } else if(strcmp(token, "raiz") == 0){
+            char * A = desempilharString(&p);
+            char novaExpressao[512];
+
+            sprintf(novaExpressao, "raiz(%s)", A);
+
+            empilharString(&p, novaExpressao);
+        
+        } else {
+            empilharString(&p, token);
+        }
+
+        token = strtok(NULL, " ");
     }
-}
 
+    char * Res = desempilharString(&p);
+    strcpy(Resultado, Res);
+    return Resultado;
 
+};
