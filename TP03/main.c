@@ -5,8 +5,8 @@
 
 #include "expressao.h"
 
-void run_test_no_expected(int id, const char *posFixa) {
-    printf("\n--- Testes %d ---\n", id);
+void run_testes(int id, const char *posFixa) {
+    printf("\n--- testes %d ---\n", id);
     printf("Expressao POSFIXA de entrada: \"%s\"\n", posFixa);
 
     char tempPosFixa_Val[512];
@@ -32,27 +32,27 @@ int main() {
     printf("----------------------------------------------------\n");
     printf("  TESTES CALCULOS DE EXPRESSOES POSFIXAS E INFIXAS\n");
     printf("----------------------------------------------------\n");
-
-    run_test_no_expected(1, "3 4 + 5 *");
-
-    run_test_no_expected(2, "7 2 * 4 +");
-
-    run_test_no_expected(3, "8 5 2 4 + * +");
-
-    run_test_no_expected(4, "6 2 / 3 + 4 *");
     
-    run_test_no_expected(5, "9 5 4 8 2 * + * +");
+    //testes do pdf
+    run_testes(1, "3 4 + 5 *");
+    run_testes(2, "7 2 * 4 +");
+    run_testes(3, "8 5 2 4 + * +");
+    run_testes(4, "6 2 / 3 + 4 *");
+    run_testes(5, "9 5 4 8 2 * + * +");
+    run_testes(6, "2 3 + log 5 /");
+    run_testes(7, "10 log 3 ^ 2 +");
+    run_testes(8, "45 60 + 30 cos *");
+    run_testes(9, "0.5 45 sen 2 ^ +");
 
-    run_test_no_expected(6, "2 3 + log 5 /");
-
-    run_test_no_expected(7, "10 log 3 ^ 2 +");
-
-    run_test_no_expected(8, "45 60 + 30 cos *");
-
-    run_test_no_expected(9, "0.5 45 sen 2 ^ +");
+    //outros testes
+    run_testes(10, "16 raiz 2 / 3 +");
+    run_testes(11, "90 sen 2 ^ 3 4 * +");
+    run_testes(12, "5 0 /"); //divisao por zero
+    run_testes(13, "2 3 ^ 4 5 * +");
+    run_testes(14, "100 3 % 5 + 2 ^");
     
     printf("\n---------------------------------------------------\n");
-    printf("  FIM DOS TESTES\n");
+    printf("fim de testes\n");
     printf("----------------------------------------------------\n");
     
     return 0;
